@@ -1,0 +1,30 @@
+$animations-shake-shake: (
+    'shake-shake': (
+        'keyframes-list': (
+            (
+                'progress': 0,
+                'props': (
+                    'transform': translate(0px, 0px) rotate(0deg)
+                )
+            ),
+            (
+                'progress': 20,
+                'props': (
+                    'transform': translate(2px, 2px) rotate(-1deg)
+                )
+            ),
+            (
+                'progress': 60,
+                'props': (
+                    'transform': translate(1px, -1px) rotate(1deg)
+                )
+            ),
+            (
+                'progress': 100,
+                'props': (
+                    'transform': translate(0px, 0px) rotate(0deg)
+                )
+            )
+        )
+    )
+);

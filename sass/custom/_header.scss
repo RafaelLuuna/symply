@@ -1,0 +1,150 @@
+.header-container{
+    @extend .shadow;
+
+    &.outview{
+        position: sticky;
+        top: 0;
+        @include animation(
+            $animation: 'slide-down',
+            $duration: 1,
+            $animation-timing-function: ease,
+        )
+    }
+
+    &.quiting{
+        position: sticky;
+        top: 0;
+        @include animation(
+            $animation: 'slide-up',
+            $duration: 1,
+            $animation-timing-function: ease,
+        )
+    }
+
+    transition: 1s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    z-index: 999999;
+
+    & > *{
+        padding: 1rem 3rem;
+        @include media-breakpoint-up(xl){
+            padding: 1rem 8rem;
+        }
+    }
+    .header{
+        height: 112px;
+        width: 100%;
+
+        @include animation(
+            $animation: 'rise-down',
+            $duration: 1,
+            $animation-timing-function: ease,
+        );
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    
+        background-color: map-get($map: $theme-colors, $key: 'light');
+        .logo{
+            max-width: 80px;
+            max-height: 80px;
+        }
+        .user-info{
+            @include animation(
+                $animation: 'rise-left',
+                $duration: 1,
+                $animation-timing-function: ease,
+            );
+
+            height: 100%;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            gap: 1rem;
+
+            p{
+                margin: 0;
+            }
+        }
+    }
+    .nav-bar{
+        background-color: map-get($map: $theme-colors, $key: 'primary');
+        width: 100%;
+
+        @include animation(
+            $animation: 'rise-down',
+            $duration: 1.5,
+            $animation-timing-function: ease,
+        );
+
+        @include media-breakpoint-up(md) {
+            button[data-bs-target="#nav-links"]{
+                display: none;
+            }
+            .collapse{
+                flex-grow: 1;
+            }
+
+        }
+
+        .nav-links{
+            @include media-breakpoint-up(md) {
+                flex-direction: row;
+            };
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            margin: 0;
+            padding: 0 1rem;
+
+            max-width: 100vw;
+            overflow: hidden;
+
+            list-style: none;
+            
+            @include animation-cascade(
+                    $group-name: 'nav-link',
+                    $group-size: 10,
+                    $animation: 'rise-down',
+                    $duration: 2,
+                    $animation-type: 'sync',
+                    $animation-timing-function: ease,
+                );
+            
+            
+            li{
+                div{
+                    a{
+                        color: map-get($map: $theme-colors, $key: 'light');
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        text-decoration: none;
+                    }
+                    padding: 0.5rem 1rem;
+                    transition: 0.5s;
+                    &:hover{
+                        background-color: rgba($color: #000000, $alpha: 0.05);
+                        border-radius: 10px;
+                        @include animation(
+                            $id: 'nav-link-hover',
+                            $animation: 'shake-shake',
+                            $duration: 0.6,
+                        )
+                    }
+                }
+            }
+
+            
+        }
+    }
+}

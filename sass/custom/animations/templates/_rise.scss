@@ -1,0 +1,87 @@
+$animations-rise: (
+    'rise-up': (
+        'keyframes-list': (
+            (
+                'progress': 0,
+                'props': (
+                    'transform': translate(0px,20px),
+                    'opacity': 0
+                )
+            ),
+            (
+                'progress': 100,
+                'props': (
+                    'transform': translate(0px,0px),
+                    'opacity': 1
+                )
+            )
+        )
+    ),
+    'rise-down': (
+        'start-position': (
+                    'transform': translate(0px,-20px),
+                    'opacity': 0
+                ),
+        'keyframes-list': (
+            (
+                'progress': 0,
+                'props': (
+                    'transform': translate(0px,-20px),
+                    'opacity': 0
+                )
+            ),
+            (
+                'progress': 100,
+                'props': (
+                    'transform': translate(0px,0px),
+                    'opacity': 1
+                )
+            )
+        )
+    ),
+    'rise-left': (
+        'start-position': (
+                    'transform': translate(20px,0px),
+                    'opacity': 0
+                ),
+        'keyframes-list': (
+            (
+                'progress': 0,
+                'props': (
+                    'transform': translate(20px,0px),
+                    'opacity': 0
+                )
+            ),
+            (
+                'progress': 100,
+                'props': (
+                    'transform': translate(0px,0px),
+                    'opacity': 1
+                )
+            )
+        )
+    ),
+    'rise-right': (
+        'start-position': (
+                    'transform': translate(-20px,0px),
+                    'opacity': 0
+                ),
+        'keyframes-list': (
+            (
+                'progress': 0,
+                'props': (
+                    'transform': translate(-20px,0px),
+                    'opacity': 0
+                )
+            ),
+            (
+                'progress': 100,
+                'props': (
+                    'transform': translate(0px,0px),
+                    'opacity': 1
+                )
+            )
+        )
+    ),
+
+);

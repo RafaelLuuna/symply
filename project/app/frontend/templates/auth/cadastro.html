@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card-container login">
+    <div class="card-cadastro">
+        <h1>Cadastre-se, porra</h1>
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        
+        <form action="/cadastro/" method="POST">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button type="submit">Cadastrar</button>
+        </form>
+        
+        <hr>
+
+        <p>Já está cadastrado? <span><a href="{% url 'login' %}">Clique aqui para fazer login</a></span></p>
+    </div>
+</div>
+
+{% endblock %}

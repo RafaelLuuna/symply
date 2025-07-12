@@ -1,0 +1,20 @@
+@import'./templates/rise';
+@import'./templates/pulse';
+@import'./templates/shake-shake';
+@import'./templates/header';
+
+@function map-collect($maps...) {
+  $collection: ();
+
+  @each $map in $maps {
+    $collection: map-merge($collection, $map);
+  }
+  @return $collection;
+}
+
+$animations: map-collect(
+    $animations-rise,
+    $animations-pulse,
+    $animations-shake-shake,
+    $animations-header,
+);

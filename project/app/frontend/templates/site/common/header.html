@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="header-container" id="header">
+    <div class="header">
+        <a href=""><img class="logo" src="{% static 'img/logo4x4.png' %}" alt=""></a>
+        <div class="user-info">
+            <p>Bem vindo, {{ request.user.get_full_name }}!</p>
+            <a href="{% url 'logout' %}" class="btn rounded-pill btn-dark">Sair</a>
+        </div>
+    </div>
+    <div class="nav-bar">
+        <button class="fa-solid fa-bars bg-tertiary-2 border-0" data-bs-toggle="collapse" data-bs-target="#nav-links" aria-expanded="true" aria-controls="collapseExample"></button>
+        <div class="collapse" id="nav-links">
+            <ul class="nav-links">
+                {% if request.user.role == 'paciente' %}
+                    <li class="nav-link-1"><div><a href="{% url 'paciente:home' %}">home</a></div></li>
+                    <li class="nav-link-2"><div><a href="{% url 'paciente:minhas_notas' %}">minhas notas</a></div></li>
+                    <li class="nav-link-3"><div><a href="{% url 'paciente:nota_cadastro' %}">Incluir nova nota</a></div></li>
+                {% elif request.user.role == 'pscicologo' %}
+                    <li class="nav-link-1"><div><a href="{% url 'pscicologo:home' %}">home</a></div></li>
+                    <li class="nav-link-2"><div><a href="{% url 'pscicologo:minhas_notas' %}">Notas do paciente</a></div></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+

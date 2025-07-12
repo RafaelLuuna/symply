@@ -1,0 +1,20 @@
+
+
+@each $color-name, $color-value in $theme-colors{
+    $rate: 0.1;
+
+    .color-#{$color-name}{
+        color: $color-value;
+    }
+
+    @for $i from 1 through 3{
+        .bg-#{$color-name}-#{$i}{
+            background-color: darken(map-get($map: $theme-colors, $key: $color-name), percentage((3 - $i) * $rate)) !important;
+        }
+    } 
+    @for $i from 4 through 6{
+        .bg-#{$color-name}-#{$i}{
+            background-color: lighten(map-get($map: $theme-colors, $key: $color-name), percentage((6 - $i) * $rate)) !important;
+        }
+    } 
+}

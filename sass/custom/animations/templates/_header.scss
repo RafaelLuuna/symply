@@ -1,0 +1,34 @@
+$animations-header: (
+    'slide-down': (
+        'keyframes-list': (
+            (
+                'progress': 0,
+                'props': (
+                    'transform': translate(0, -100%)
+                )
+            ),
+            (
+                'progress': 100,
+                'props': (
+                    'transform': translate(0, 0%)
+                )
+            )
+        )
+    ),
+    'slide-up': (
+        'keyframes-list': (
+            (
+                'progress': 0,
+                'props': (
+                    'transform': translate(0, 0%)
+                )
+            ),
+            (
+                'progress': 100,
+                'props': (
+                    'transform': translate(0, -100%)
+                )
+            )
+        )
+    )
+);

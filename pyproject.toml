@@ -1,0 +1,33 @@
+[project]
+name = "aquecimento-project"
+version = "0.1.0"
+description = "Projeto de aquecimento para o hackaton 2025, ele consiste em uma página simples com um sistema de login"
+authors = [
+    {name = "rafaelluuna",email = "rafael.luna.2019@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10, <3.13"
+dependencies = [
+    "django (==4.2.23)",
+    "django-widget-tweaks (>=1.5.0,<2.0.0)",
+    "django-debug-toolbar (>=5.2.0,<6.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry]
+package-mode = false
+
+
+
+[tool.kolo]
+
+lightweight_repr = true
+
+[tool.kolo.filters]
+
+ignore_request_paths = ["/static/", "favicon.ico"]

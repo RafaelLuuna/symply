@@ -1,0 +1,46 @@
+$animations-pulse: (
+    'pulse': (
+        'keyframes-list': (
+            (
+                'progress': 0,
+                'props': (
+                    'transform': scale(1)
+                )
+            ),
+            (
+                'progress': 50,
+                'props': (
+                    'transform': scale(1.008)
+                )
+            ),
+            (
+                'progress': 100,
+                'props': (
+                    'transform': scale(1)
+                )
+            )
+        )
+    ),
+    'size-up': (
+        'keyframes-list': (
+            (
+                'progress': 0,
+                'props': (
+                    'transform': scale(0)
+                )
+            ),
+            (
+                'progress': 70,
+                'props': (
+                    'transform': scale(1.02)
+                )
+            ),
+            (
+                'progress': 100,
+                'props': (
+                    'transform': scale(1)
+                )
+            )
+        )
+    )
+);

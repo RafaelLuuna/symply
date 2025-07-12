@@ -1,0 +1,166 @@
+@mixin widget-template($i){
+    $col-size: percentage(((100/12)/100)*$i);
+    @extend .col-#{$i};
+    width: calc($col-size - $spacer);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p, a, h1, h2, h3, h4, h5, h6 {
+        width: 100%;
+    }
+
+    img{
+        box-shadow: 10px 10px 5px rgba($color: #000000, $alpha: 0.3);
+        width: 100%;
+        border-radius: 10px;
+    }
+
+}
+
+.widget-no-content{
+    @include widget-template(12);
+    display: flex;
+    justify-content: center;
+    h1, h4, p{
+        text-align: center;
+        color: map-get($map: $theme-colors, $key: 'light');
+        width: 75%;
+        @include animation(
+            $id: 'no-content-title',
+            $animation: 'rise-up',
+            $duration: 0.6,
+            $animation-timing-function: ease,
+        );
+    }
+    img{
+        border-radius: 50%;
+        width: 50px;
+        background-color: map-get($map: $theme-colors, $key: 'light');
+        object-fit: cover;
+        // overflow: hidden;
+
+        @include media-breakpoint-up(md){
+            width: 300px;
+        }
+
+        @include animation(
+            $id: 'no-content-img',
+            $animation: 'size-up',
+            $duration: 1,
+            $animation-timing-function: ease,
+        );
+    }
+}
+
+@for $i from 1 through 12{
+
+    .widget-#{$i}{
+        @include widget-template($i);
+        color: map-get($map: $theme-colors, $key: 'light');
+        @include animation-cascade(
+                            $group-name: 'container-titles',
+                            $group-size: 12,
+                            $animation: 'rise-right',
+                            $duration: 2,
+                            $animation-type: 'sync',
+                            $animation-timing-function: ease,
+                        );
+    
+        h1{
+            @extend .container-titles-1;
+        }
+        h4{
+            @extend .container-titles-2;
+        }
+        p{
+            @extend .container-titles-3;
+        }
+        img{
+            @extend .container-titles-1;
+        }
+    }
+
+
+
+    .widget-card-#{$i}{
+        @include widget-template($i);
+        @include template-card();
+        @include animation-cascade(
+                            $group-name: 'animation-widget-card-titles',
+                            $group-size: 4,
+                            $animation: 'rise-up',
+                            $duration: 0.8,
+                            $animation-type: 'cascade',
+                            $animation-timing-function: ease,
+                        );
+
+        @include media-breakpoint-down(lg){
+            width: 100% !important;
+        }
+
+
+        textarea{
+            height: 120px;
+        }
+        img, h1{
+            @extend .animation-widget-card-titles-1;
+        }
+        form, h4{
+            @extend .animation-widget-card-titles-2;
+        }
+        p, a, button{
+            @extend .animation-widget-card-titles-3;
+        }
+    }
+
+
+    .widget-card-nota-#{$i}{
+        @extend .widget-card-#{$i};
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        padding: 1rem;
+
+        img{
+            height: 150px;
+            width: 100%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        h1{
+            margin-bottom: 0;
+        }
+        h4{
+            margin-bottom: 0;
+        }
+        p{
+            margin-bottom: 1rem;
+        }
+
+    
+        div{
+            width: 100%;
+        }
+
+        a.delete{
+            @extend .col;
+            max-width: 50px;
+            max-height: 40px;
+        }
+    }
+
+    .widget-banner-#{$i}{
+        @include widget-template($i);
+        img{
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+    }
+}

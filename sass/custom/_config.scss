@@ -1,0 +1,25 @@
+@import "../bootstrap/scss/functions"; 
+@import "../bootstrap/scss/variables";
+
+$primary: #0D192D;
+$secondary: #287A8E;
+$tertiary: #2F2489;
+$light-gray: #C5D0E3;
+$success: #41DC33;
+$danger: #DC1E1B;
+$dark: #060C14;
+
+$min-contrast-ratio: 5;
+
+
+$theme-colors: map-merge($theme-colors, (
+  "primary": $primary,
+  "secondary": $secondary,
+  "tertiary": $tertiary,
+  "light": $light-gray,
+  "success": $success,
+  "danger": $danger,
+  "dark": $dark,
+));
+
+@import "../bootstrap/scss/bootstrap";

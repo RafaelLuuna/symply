@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'site/common/header.html' %}
+{% include 'site/common/footer.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="card-container">
+            <div class="widget-card-6">
+                <h1>
+                    {% if id %}{{ 'Editar' }}{% else %}{{ 'Cadastrar' }}{% endif %} Nota
+                </h1>
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if id is None %}
+                <form action="{% url 'paciente:nota_cadastro' %}" method="POST" enctype="multipart/form-data">
+                {% else %}    
+                <form action="{% url 'paciente:nota_edit' id %}" method="POST" enctype="multipart/form-data">
+                {% endif %}
+                
+                    {% csrf_token %}
+                    {{ form.as_div }}
+                    <button type="submit">
+                        {% if id %}{{ 'Salvar' }}{% else %}{{ 'Cadastrar Nota' }}{% endif %}
+                    </button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

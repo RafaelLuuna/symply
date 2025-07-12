@@ -1,0 +1,28 @@
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: start;
+    .form-fields{
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+    .field-group{
+        label{
+            @extend .form-label;
+        }
+        input, textarea{
+            @extend .form-control;
+        }
+        select{
+            @extend .form-select;
+        }
+        .help-text{
+            @extend .form-text;
+        }
+    }
+    button{
+        @extend .rounded-pill;
+        width: 250px;
+    }
+}

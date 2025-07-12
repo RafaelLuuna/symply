@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'site/common/header.html' %}
+
+<div class="container">
+
+    
+    <div class="row">
+        <div class="widget-12 text-center">
+            <h1>Bem vindo ao nosso site!</h1>
+            <p>Esse site é um estudo de desenvolvimento teste, onde vou incluir funcionalidades que pretendo aplicar em implantações reais futuramente.</p>
+        </div>
+    </div>
+
+
+    <hr>
+
+    <div class="row">
+        <div class="widget-card-12">
+            <h1>Pensamentos do paciente</h1>
+            <h4>Consulte aqui os pensamentos que seus pacientes anotaram.</h4>
+            <div class="text-start">
+                <p>Rafael Luna:<span>
+                    <a class="btn" href="{% url 'pscicologo:minhas_notas' %}">Ver pensamentos</a>
+                </span>
+                </p>
+            </div>
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+</div>
+
+
+
+{% include 'site/common/footer.html' %}
+
+{% endblock %}

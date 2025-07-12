@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'site/common/header.html' %}
+{% include 'site/common/footer.html' %}
+
+<div class="container">
+    <div class="row">
+        {% if request.user.role == 'paciente' %}<a href="{% url 'paciente:minhas_notas' %}" class="btn col-2">Voltar</a>
+        {% elif request.user.role == 'pscicologo' %}<a href="{% url 'pscicologo:minhas_notas' %}" class="btn col-2">Voltar</a>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="widget-card-12">
+            <h1>{{ nota.titulo }}</h1>
+            <p>{{ nota.conteudo }}</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

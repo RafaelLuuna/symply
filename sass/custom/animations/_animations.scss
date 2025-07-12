@@ -1,0 +1,144 @@
+@import 'templates';
+
+@function step($progress, $duration, $delay-start ,$delay-end){ 
+    $total-duration: $delay-start + $duration + $delay-end;
+    $progress: ($duration / $total-duration) * ($progress / 100);
+
+    $offset: $delay-start / $total-duration;
+    $progress: $offset + $progress;
+    
+    @return percentage($progress);
+}
+
+@mixin create-keyframes($animation-data){
+    $animation-kf-id: map-get($map: $animation-data, $key: 'kf-id');
+    
+    $animation-name: map-get($map: $animation-data, $key: 'animation');
+    $animation-duration: map-get($map: $animation-data, $key: 'duration');
+    $delay-start: map-get($map: $animation-data, $key: 'delay-start');    
+    $delay-end: map-get($map: $animation-data, $key: 'delay-end');    
+
+    $current-animation: map-get($map: $animations, $key: $animation-name); 
+    $keyframes-list: map-get($map: $current-animation, $key: 'keyframes-list');
+    $keyframes-first: nth($list: $keyframes-list, $n: 1);
+    $start-position: map-get($map: $keyframes-first, $key: 'props');
+
+    @keyframes #{$animation-kf-id}
+    {
+        0%{
+            @each $prop-name, $prop-value in $start-position{
+                #{$prop-name}: $prop-value;
+            }
+        }
+        @each $step-item in $keyframes-list{
+            $progress: map-get($map: $step-item, $key: 'progress');
+            $props: map-get($map: $step-item, $key: 'props');
+            #{step($progress, $animation-duration, $delay-start, $delay-end)} {
+                @each $prop-name, $prop-value in $props{
+                    #{$prop-name}: $prop-value;
+                }
+            }
+        }
+    }
+}
+
+@mixin animation-cascade(
+        $group-name,
+        $group-size,
+        $animation,
+        $duration,
+        $duration-per-element: true,
+        $group-delay-start: 0,
+        $group-delay-end: 0,
+        $animation-delay-start: 0,
+        $animation-delay-end: 0,
+        $animation-type: 'cascade',
+        $animation-iteration-count: 1,
+        $animation-direction: normal,
+        $animation-timing-function: linear,
+        $animation-fill-mode: forwards,
+    ){
+        @if $duration-per-element == false or $animation-type == 'sync' {
+            $duration: $duration / $group-size;
+        }
+
+        $total-duration: ($animation-delay-start + $duration + $animation-delay-end);
+        
+        @for $i from 1 through $group-size{
+            $id: $group-name + '-' + $i;
+
+            .#{$id}{
+                $offset: $total-duration * ($i - 1);
+                $element-delay-start: $offset + $animation-delay-start;
+
+                $element-delay-end: 0;
+                $element-duration: $duration;
+                @if $animation-type == 'cascade'{
+                    $element-delay-end: $total-duration * ($group-size - $i) + $animation-delay-end;
+                }
+                @if $animation-type == 'sync'{
+                    $element-duration: $duration + $total-duration * ($group-size - $i);
+                    $element-delay-end: $animation-delay-end;
+                }
+    
+    
+                @include animation( 
+                                    $animation: $animation,
+                                    $duration: $element-duration,
+                                    $id: $id,
+                                    $animation-delay-start: $element-delay-start + $group-delay-start,
+                                    $animation-delay-end: $element-delay-end + $group-delay-end,
+                                    $animation-iteration-count: $animation-iteration-count,
+                                    $animation-direction: $animation-direction,
+                                    $animation-timing-function: $animation-timing-function,
+                                    $animation-fill-mode: $animation-fill-mode
+                                );
+                
+            }
+
+        }
+
+    }
+
+@mixin animation(
+        $id: 'animation',
+        $animation,
+        $duration,
+        $animation-delay-start: 0,
+        $animation-delay-end: 0,
+        $animation-iteration-count: 1,
+        $animation-direction: normal,
+        $animation-timing-function: linear,
+        $animation-fill-mode: forwards,
+    ){
+    
+    $total-duration: $animation-delay-start + $duration + $animation-delay-end;
+    
+    $kf-id: #{$id}-#{$animation};
+    
+    $animation-data: (
+        'kf-id': $kf-id,
+        'animation': $animation,
+        'duration': $duration,
+        'delay-start': $animation-delay-start,
+        'delay-end': $animation-delay-end,
+        'total-duration': $total-duration
+    );
+
+    @include create-keyframes($animation-data);
+
+    
+    animation-name: #{$kf-id};
+    animation-duration: #{$total-duration}s;
+    animation-iteration-count: $animation-iteration-count;
+    animation-direction: $animation-direction;
+    animation-timing-function: $animation-timing-function;
+    animation-fill-mode: $animation-fill-mode;
+    
+        
+    }
+
+
+.no-animation{
+    animation-name: none !important;
+}
